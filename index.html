@@ -738,8 +738,45 @@
       .coverage-grid { grid-template-columns: 1fr; }
       .map-shell { min-height: 360px; }
       .features { grid-template-columns: 1fr; }
-      nav { padding: 1rem 1.5rem; }
+      .hero-left { padding: 4.5rem 1.4rem 3.5rem; }
+      .hero-btns { flex-wrap: wrap; }
+      .hero-btns a { flex: 1 1 180px; text-align: center; }
+      .hero-stats { flex-wrap: wrap; gap: 1.2rem 1.5rem; margin-top: 2.4rem; }
+      .hero-stats > div { min-width: 120px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; margin-bottom: 2rem; }
+      .fleet, .coverage, .features, .cta-section { padding: 5rem 1.4rem; }
+      .vehicle-card { padding: 1.5rem; }
+      .coverage-cities { padding: 1.4rem; }
+      nav {
+        padding: 1rem 1.2rem;
+        padding-left: max(1.2rem, env(safe-area-inset-left));
+        padding-right: max(1.2rem, env(safe-area-inset-right));
+      }
+      .nav-cta { padding: 0.5rem 0.9rem; font-size: 0.7rem; letter-spacing: 0.06em; }
       .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
+      .hero-sub { font-size: 0.8rem; max-width: none; }
+      .hero-btns { flex-direction: column; }
+      .hero-btns a { width: 100%; }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .hero-stats > div:last-child { grid-column: 1 / -1; }
+      .stat-num { font-size: 1.5rem; }
+      .vehicle-specs { grid-template-columns: 1fr; }
+      .map-shell { min-height: 300px; }
+      .city-label { font-size: 9px; }
+      .city-label-sub { font-size: 8px; }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
     }
   </style>
 </head>
@@ -997,7 +1034,7 @@
       if (!canvas || !container) return;
 
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
       renderer.setClearColor(0x000000, 0);
       renderer.shadowMap.enabled = true;
 
@@ -1266,7 +1303,7 @@
       const parent = canvas.parentElement;
 
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.setClearColor(0x090C10, 1);
 
       const scene = new THREE.Scene();
@@ -1309,6 +1346,7 @@
 
       let dragging = false;
       let px = 0;
+      const spinSpeed = window.matchMedia('(max-width: 900px)').matches ? 0.0024 : 0.006;
       canvas.addEventListener('mousedown', e => { dragging = true; px = e.clientX; });
       window.addEventListener('mouseup', () => { dragging = false; });
       window.addEventListener('mousemove', e => {
@@ -1320,7 +1358,7 @@
 
       function animate() {
         requestAnimationFrame(animate);
-        if (!dragging) vehicle.rotation.y += 0.006;
+        if (!dragging) vehicle.rotation.y += spinSpeed;
         renderer.render(scene, camera);
       }
       animate();
