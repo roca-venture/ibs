@@ -4,6 +4,15 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IBS — Intelligent Battery Systems</title>
+  <meta name="description" content="IBS ofrece soluciones de movilidad eléctrica para flotas de última milla: menor costo operativo, cero emisiones y control inteligente."/>
+  <meta name="theme-color" content="#090C10"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="IBS"/>
+  <link rel="icon" type="image/png" sizes="180x180" href="apple-touch-icon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -571,12 +580,12 @@
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Navegación principal">
     <a href="#" class="nav-logo">IBS</a>
     <ul class="nav-links">
-      <a href="#fleet">Flota</a>
-      <a href="#features">Tecnología</a>
-      <a href="#contacto">Contacto</a>
+      <li><a href="#fleet">Flota</a></li>
+      <li><a href="#features">Tecnología</a></li>
+      <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a href="#contacto" class="nav-cta">Cotizar</a>
   </nav>
@@ -985,6 +994,7 @@
     }
 
     window.addEventListener('load', () => {
+      if (typeof THREE === 'undefined') return;
       initHeroViewer();
       initCardViewer('card-canvas-1', 0x00E5A0, 'van');
       initCardViewer('card-canvas-2', 0x0099FF, 'moto');
