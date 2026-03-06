@@ -397,6 +397,88 @@
       margin-top: 0.2rem;
     }
 
+    .vehicle-links {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .vehicle-link {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      padding: 0.38rem 0.62rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .vehicle-link:hover {
+      border-color: var(--accent);
+      color: var(--ink);
+      background: rgba(0, 229, 160, 0.08);
+    }
+
+    .tech-specs {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .tech-card {
+      background: var(--surface);
+      padding: 1.35rem;
+    }
+
+    .tech-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .tech-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .tech-list {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .tech-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.85rem;
+      border-top: 1px dashed rgba(30, 37, 48, 0.8);
+      padding-top: 0.5rem;
+    }
+
+    .tech-key {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 112px;
+    }
+
+    .tech-val {
+      font-size: 0.84rem;
+      line-height: 1.45;
+      text-align: right;
+    }
+
     /* ── COVERAGE MAP ── */
     .coverage {
       padding: 8rem 3rem;
@@ -735,6 +817,7 @@
       .hero { grid-template-columns: 1fr; }
       .hero-right { display: none; }
       .fleet-grid { grid-template-columns: 1fr; }
+      .tech-specs { grid-template-columns: 1fr; }
       .coverage-grid { grid-template-columns: 1fr; }
       .map-shell { min-height: 360px; }
       .features { grid-template-columns: 1fr; }
@@ -769,6 +852,8 @@
       .hero-stats > div:last-child { grid-column: 1 / -1; }
       .stat-num { font-size: 1.5rem; }
       .vehicle-specs { grid-template-columns: 1fr; }
+      .tech-row { flex-direction: column; gap: 0.2rem; }
+      .tech-val { text-align: left; }
       .map-shell { min-height: 300px; }
       .city-label { font-size: 9px; }
       .city-label-sub { font-size: 8px; }
@@ -816,11 +901,11 @@
           <div class="stat-label">CO₂ por km</div>
         </div>
         <div>
-          <div class="stat-num">302<span>km</span></div>
+          <div class="stat-num">270<span>km</span></div>
           <div class="stat-label">autonomía máxima</div>
         </div>
         <div>
-          <div class="stat-num">1,505<span>kg</span></div>
+          <div class="stat-num">1,550<span>kg</span></div>
           <div class="stat-label">carga útil máxima</div>
         </div>
       </div>
@@ -839,7 +924,7 @@
       <div>
         <div class="section-tag">Catálogo 2026</div>
         <h2 class="section-title">Nuestra flota</h2>
-        <p class="section-note">Propuesta visual preliminar basada en referencias de BPS E-TRUCK.</p>
+        <p class="section-note">Datos técnicos obtenidos de brochures oficiales de BPS E-TRUCK (CLTC con carga de 100 kg).</p>
       </div>
       <a href="#contacto" class="btn-outline">Solicitar cotización →</a>
     </div>
@@ -855,8 +940,11 @@
         <div class="vehicle-specs">
           <div><div class="spec-val">150-180 km</div><div class="spec-key">Autonomía</div></div>
           <div><div class="spec-val">700 kg</div><div class="spec-key">Carga útil</div></div>
-          <div><div class="spec-val">80 km/h</div><div class="spec-key">Velocidad máx.</div></div>
-          <div><div class="spec-val">5 kW</div><div class="spec-key">Motor</div></div>
+          <div><div class="spec-val">17.88 kWh</div><div class="spec-key">Batería</div></div>
+          <div><div class="spec-val">30 kW</div><div class="spec-key">Potencia</div></div>
+        </div>
+        <div class="vehicle-links">
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_de34743aedb943db8a9d2aaef0aaa886.pdf">Brochure V2</a>
         </div>
       </div>
 
@@ -869,9 +957,14 @@
         <div class="vehicle-type">Carga eléctrica · Chasis / Caja seca / Plataforma</div>
         <div class="vehicle-specs">
           <div><div class="spec-val">170-200 km</div><div class="spec-key">Autonomía</div></div>
-          <div><div class="spec-val">650 kg</div><div class="spec-key">Carga útil</div></div>
-          <div><div class="spec-val">77 km/h</div><div class="spec-key">Velocidad máx.</div></div>
-          <div><div class="spec-val">7.5 kW</div><div class="spec-key">Motor</div></div>
+          <div><div class="spec-val">650-730 kg</div><div class="spec-key">Carga útil</div></div>
+          <div><div class="spec-val">20.72 kWh</div><div class="spec-key">Batería</div></div>
+          <div><div class="spec-val">20 kW</div><div class="spec-key">Potencia</div></div>
+        </div>
+        <div class="vehicle-links">
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_c1187cffbd054e6cb1e80abddbbfb937.pdf">Brochure Chasis</a>
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_de0b139a11174f319c11751a768e98b6.pdf">Brochure Caja</a>
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_e1b449fa3c754a9ca476e9319dec84a2.pdf">Brochure Plataforma</a>
         </div>
       </div>
 
@@ -883,10 +976,15 @@
         <div class="vehicle-name">X7</div>
         <div class="vehicle-type">Mediano eléctrico · Chasis / Caja seca / Plataforma</div>
         <div class="vehicle-specs">
-          <div><div class="spec-val">170-200 km</div><div class="spec-key">Autonomía</div></div>
-          <div><div class="spec-val">1,000 kg</div><div class="spec-key">Carga útil</div></div>
-          <div><div class="spec-val">85 km/h</div><div class="spec-key">Velocidad máx.</div></div>
-          <div><div class="spec-val">15 kW</div><div class="spec-key">Motor</div></div>
+          <div><div class="spec-val">170-230 km</div><div class="spec-key">Autonomía</div></div>
+          <div><div class="spec-val">850-1110 kg</div><div class="spec-key">Carga útil</div></div>
+          <div><div class="spec-val">28.8 kWh</div><div class="spec-key">Batería</div></div>
+          <div><div class="spec-val">60 kW</div><div class="spec-key">Potencia</div></div>
+        </div>
+        <div class="vehicle-links">
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_6f4d7b527d0a49929d2b4c3b621b0b96.pdf">Brochure Chasis</a>
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_fb6dccdf126646da85dc586d60e59ce6.pdf">Brochure Caja</a>
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_fe6aac6da6cc465cb2545581a3ab4ade.pdf">Brochure Plataforma</a>
         </div>
       </div>
 
@@ -898,13 +996,70 @@
         <div class="vehicle-name">MAXENCE</div>
         <div class="vehicle-type">Pesado eléctrico · Caja seca / Plataforma / Chasis</div>
         <div class="vehicle-specs">
-          <div><div class="spec-val">260-302 km</div><div class="spec-key">Autonomía</div></div>
-          <div><div class="spec-val">1,505 kg</div><div class="spec-key">Carga útil</div></div>
-          <div><div class="spec-val">100 km/h</div><div class="spec-key">Velocidad máx.</div></div>
-          <div><div class="spec-val">35 kW</div><div class="spec-key">Motor</div></div>
+          <div><div class="spec-val">240-270 km</div><div class="spec-key">Autonomía</div></div>
+          <div><div class="spec-val">1,550 kg</div><div class="spec-key">Carga útil</div></div>
+          <div><div class="spec-val">41.86 kWh</div><div class="spec-key">Batería</div></div>
+          <div><div class="spec-val">60 kW</div><div class="spec-key">Potencia</div></div>
+        </div>
+        <div class="vehicle-links">
+          <a class="vehicle-link" target="_blank" rel="noopener noreferrer" href="https://www.bpsetruck.com/_files/ugd/8b422d_e3208168649b4a6c97278ac2d179c6dd.pdf">Brochure Maxence</a>
         </div>
       </div>
 
+    </div>
+
+    <div class="tech-specs">
+      <article class="tech-card">
+        <h3>V2 · Ficha técnica</h3>
+        <p class="tech-meta">Configuración principal</p>
+        <div class="tech-list">
+          <div class="tech-row"><span class="tech-key">Dimensiones</span><span class="tech-val">3.49 x 1.47 x 1.69 m</span></div>
+          <div class="tech-row"><span class="tech-key">Capacidad</span><span class="tech-val">700 kg · 2 asientos · 2.6 m3</span></div>
+          <div class="tech-row"><span class="tech-key">Batería</span><span class="tech-val">LFP · 17.88 kWh</span></div>
+          <div class="tech-row"><span class="tech-key">Autonomía</span><span class="tech-val">150-180 km (CLTC)</span></div>
+          <div class="tech-row"><span class="tech-key">Carga</span><span class="tech-val">AC 5-7 h · DC 20%-80% en 45 min</span></div>
+          <div class="tech-row"><span class="tech-key">Tren motriz</span><span class="tech-val">Motor síncrono · 30 kW · 80 km/h</span></div>
+        </div>
+      </article>
+
+      <article class="tech-card">
+        <h3>1500 · Ficha técnica real</h3>
+        <p class="tech-meta">Variantes: Chasis, Caja seca y Plataforma</p>
+        <div class="tech-list">
+          <div class="tech-row"><span class="tech-key">Dimensiones</span><span class="tech-val">4.20 x 1.57 x 1.69 m (chasis)<br/>4.20 x 1.57 x 2.04 m (caja)<br/>4.20 x 1.46 x 1.68 m (plataforma)</span></div>
+          <div class="tech-row"><span class="tech-key">Capacidad</span><span class="tech-val">650-730 kg · 2 asientos · hasta 4.4 m3</span></div>
+          <div class="tech-row"><span class="tech-key">Batería</span><span class="tech-val">LFP · 20.72 kWh</span></div>
+          <div class="tech-row"><span class="tech-key">Autonomía</span><span class="tech-val">170-200 km (CLTC)</span></div>
+          <div class="tech-row"><span class="tech-key">Carga</span><span class="tech-val">AC 6-8 h · DC no aplica</span></div>
+          <div class="tech-row"><span class="tech-key">Tren motriz</span><span class="tech-val">Motor síncrono · 20 kW · 77 km/h</span></div>
+        </div>
+      </article>
+
+      <article class="tech-card">
+        <h3>X7 · Ficha técnica real</h3>
+        <p class="tech-meta">Variantes: Chasis, Caja seca y Plataforma</p>
+        <div class="tech-list">
+          <div class="tech-row"><span class="tech-key">Dimensiones</span><span class="tech-val">4.40 x 1.57 x 2.40 m (chasis)<br/>4.20 x 1.57 x 1.69 m (caja)<br/>4.20 x 1.46 x 1.68 m (plataforma)</span></div>
+          <div class="tech-row"><span class="tech-key">Capacidad</span><span class="tech-val">850-1110 kg · 2 asientos · hasta 6 m3</span></div>
+          <div class="tech-row"><span class="tech-key">Batería</span><span class="tech-val">LFP · 28.8 kWh</span></div>
+          <div class="tech-row"><span class="tech-key">Autonomía</span><span class="tech-val">170-230 km (CLTC)</span></div>
+          <div class="tech-row"><span class="tech-key">Carga</span><span class="tech-val">AC 8-10 h · DC 20%-80% en 45 min o 1 h según versión</span></div>
+          <div class="tech-row"><span class="tech-key">Tren motriz</span><span class="tech-val">Motor síncrono · 60 kW · 85 km/h</span></div>
+        </div>
+      </article>
+
+      <article class="tech-card">
+        <h3>MAXENCE · Ficha técnica</h3>
+        <p class="tech-meta">Configuración principal</p>
+        <div class="tech-list">
+          <div class="tech-row"><span class="tech-key">Dimensiones</span><span class="tech-val">4.86 x 1.75 x 1.99 m</span></div>
+          <div class="tech-row"><span class="tech-key">Capacidad</span><span class="tech-val">1550 kg · 2 asientos · 6.2 m3</span></div>
+          <div class="tech-row"><span class="tech-key">Batería</span><span class="tech-val">LFP · 41.86 kWh</span></div>
+          <div class="tech-row"><span class="tech-key">Autonomía</span><span class="tech-val">240-270 km (CLTC)</span></div>
+          <div class="tech-row"><span class="tech-key">Carga</span><span class="tech-val">AC 14 h · DC 20%-80% en 1h 30m</span></div>
+          <div class="tech-row"><span class="tech-key">Tren motriz</span><span class="tech-val">Motor síncrono · 60 kW · 100 km/h</span></div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -1184,115 +1339,151 @@
     }
 
     // ── CARD MINI VIEWERS ──
+    const VEHICLE_ASSETS = {
+      v2: {
+        image: 'https://static.wixstatic.com/media/ff08fe_5e49c4f184fa4d3ea28aef681211c2a6~mv2.png/v1/crop/x_221,y_0,w_1711,h_1080/fill/w_1286,h_812,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/V2%20COSTADO%20CHOFER_01_blanco.png',
+        bodyW: 2.2,
+        chassisLen: 3.2,
+        plateW: 2.85,
+        plateH: 1.44,
+        plateY: 1.08,
+        wheels: [[-0.95, 1.12], [0.95, 1.12], [-0.95, -1.05], [0.95, -1.05]],
+        wheelR: 0.3,
+        accent: 0xa8d9be
+      },
+      '1500': {
+        image: 'https://static.wixstatic.com/media/ff08fe_85c5bc912cad466493565b66cd259de5~mv2.png/v1/fill/w_511,h_392,al_c,lg_1,q_85,enc_avif,quality_auto/bps-1500-365x302.png',
+        bodyW: 2.28,
+        chassisLen: 3.95,
+        plateW: 2.98,
+        plateH: 1.34,
+        plateY: 1.06,
+        wheels: [[-1.0, 1.38], [1.0, 1.38], [-1.0, -1.42], [1.0, -1.42]],
+        wheelR: 0.31,
+        accent: 0x8fc4f0
+      },
+      x7: {
+        image: 'https://static.wixstatic.com/media/8b422d_05472bee84f0480c97891dbf9b861a23~mv2.png/v1/crop/x_92,y_0,w_2602,h_1500/fill/w_722,h_430,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chasis%20Cab%20X7_edited_edited_edited.png',
+        bodyW: 2.46,
+        chassisLen: 4.38,
+        plateW: 3.18,
+        plateH: 1.48,
+        plateY: 1.2,
+        wheels: [[-1.1, 1.58], [1.1, 1.58], [-1.1, -0.2], [1.1, -0.2], [-1.1, -1.68], [1.1, -1.68]],
+        wheelR: 0.34,
+        accent: 0xb3d7bb
+      },
+      maxence: {
+        image: 'https://static.wixstatic.com/media/8b422d_41168029b47541e7b74af9e045476b3b~mv2.png/v1/crop/x_0,y_252,w_1218,h_715/fill/w_450,h_264,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/BPS-E-TRUCK---MAXENCE-1_edited.png',
+        bodyW: 2.34,
+        chassisLen: 4.72,
+        plateW: 3.32,
+        plateH: 1.56,
+        plateY: 1.26,
+        wheels: [[-1.05, 1.7], [1.05, 1.7], [-1.05, -1.72], [1.05, -1.72]],
+        wheelR: 0.36,
+        accent: 0xffb36e
+      }
+    };
+
+    const vehicleTextureCache = {};
+    const vehicleTextureLoader = new THREE.TextureLoader();
+    vehicleTextureLoader.setCrossOrigin('anonymous');
+
     function addWheels(group, wheelPositions, radius = 0.3, width = 0.2) {
-      const wheelMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.9 });
-      const rimMat = new THREE.MeshStandardMaterial({ color: 0x9aa2aa, roughness: 0.25, metalness: 0.7 });
+      const wheelMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.92 });
+      const rimMat = new THREE.MeshStandardMaterial({ color: 0x9aa2aa, roughness: 0.26, metalness: 0.72 });
       wheelPositions.forEach(([x, z]) => {
         const tire = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, width, 24), wheelMat);
         tire.rotation.z = Math.PI / 2;
         tire.position.set(x, radius, z);
         group.add(tire);
-        const rim = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.55, radius * 0.55, width + 0.02, 16), rimMat);
+
+        const rim = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.54, radius * 0.54, width + 0.02, 18), rimMat);
         rim.rotation.z = Math.PI / 2;
         rim.position.set(x, radius, z);
         group.add(rim);
       });
     }
 
-    function buildVehicleModel(modelKey) {
-      const vehicle = new THREE.Group();
-      const white = new THREE.MeshStandardMaterial({ color: 0xf3f6f9, roughness: 0.22, metalness: 0.1 });
-      const panel = new THREE.MeshStandardMaterial({ color: 0xa8d9be, roughness: 0.3, metalness: 0.08 });
-      const glass = new THREE.MeshStandardMaterial({ color: 0x18222d, roughness: 0.06, metalness: 0.2, transparent: true, opacity: 0.86 });
-      const dark = new THREE.MeshStandardMaterial({ color: 0x24282e, roughness: 0.85 });
-      const bed = new THREE.MeshStandardMaterial({ color: 0x3d4752, roughness: 0.55, metalness: 0.15 });
+    function addPhotoVehicle(group, cfg) {
+      const depthPlate = new THREE.Mesh(
+        new THREE.PlaneGeometry(cfg.plateW * 0.98, cfg.plateH * 0.98),
+        new THREE.MeshBasicMaterial({ color: 0x0a1016, transparent: true, opacity: 0.45, side: THREE.DoubleSide })
+      );
+      depthPlate.position.set(-0.08, cfg.plateY - 0.03, -0.14);
+      depthPlate.rotation.y = 0.28;
+      group.add(depthPlate);
 
-      if (modelKey === 'v2') {
-        const chassis = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.16, 3.4), dark);
-        chassis.position.y = 0.5;
-        vehicle.add(chassis);
-        const cab = new THREE.Mesh(new THREE.BoxGeometry(1.86, 1.06, 1.42), white);
-        cab.position.set(0, 1.0, 1.05);
-        vehicle.add(cab);
-        const roof = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.34, 1.05), white);
-        roof.position.set(0, 1.64, 0.95);
-        vehicle.add(roof);
-        const cargo = new THREE.Mesh(new THREE.BoxGeometry(1.9, 1.32, 1.72), white);
-        cargo.position.set(0, 1.04, -0.56);
-        vehicle.add(cargo);
-        const front = new THREE.Mesh(new THREE.BoxGeometry(1.87, 0.46, 0.06), panel);
-        front.position.set(0, 0.74, 1.75);
-        vehicle.add(front);
-        const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.62, 0.56, 0.06), glass);
-        windshield.position.set(0, 1.2, 1.75);
-        vehicle.add(windshield);
-        addWheels(vehicle, [[-0.95, 1.18], [0.95, 1.18], [-0.95, -1.14], [0.95, -1.14]], 0.3, 0.2);
-      } else if (modelKey === '1500') {
-        const chassis = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.16, 4.0), dark);
-        chassis.position.y = 0.5;
-        vehicle.add(chassis);
-        const cab = new THREE.Mesh(new THREE.BoxGeometry(1.86, 1.08, 1.38), white);
-        cab.position.set(0, 1.02, 1.36);
-        vehicle.add(cab);
-        const cabinTop = new THREE.Mesh(new THREE.BoxGeometry(1.62, 0.3, 1.0), white);
-        cabinTop.position.set(0, 1.65, 1.26);
-        vehicle.add(cabinTop);
-        const flatbed = new THREE.Mesh(new THREE.BoxGeometry(2.02, 0.2, 2.08), bed);
-        flatbed.position.set(0, 0.88, -0.52);
-        vehicle.add(flatbed);
-        const bedRailL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.32, 2.08), panel);
-        const bedRailR = bedRailL.clone();
-        bedRailL.position.set(-1.0, 1.06, -0.52);
-        bedRailR.position.set(1.0, 1.06, -0.52);
-        vehicle.add(bedRailL, bedRailR);
-        const front = new THREE.Mesh(new THREE.BoxGeometry(1.88, 0.46, 0.06), new THREE.MeshStandardMaterial({ color: 0x8fc4f0, roughness: 0.28 }));
-        front.position.set(0, 0.74, 2.03);
-        vehicle.add(front);
-        const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.62, 0.54, 0.06), glass);
-        windshield.position.set(0, 1.18, 2.03);
-        vehicle.add(windshield);
-        addWheels(vehicle, [[-1.0, 1.45], [1.0, 1.45], [-1.0, -1.48], [1.0, -1.48]], 0.31, 0.2);
-      } else if (modelKey === 'x7') {
-        const chassis = new THREE.Mesh(new THREE.BoxGeometry(2.46, 0.18, 4.4), dark);
-        chassis.position.y = 0.54;
-        vehicle.add(chassis);
-        const cab = new THREE.Mesh(new THREE.BoxGeometry(2.04, 1.16, 1.54), white);
-        cab.position.set(0, 1.08, 1.46);
-        vehicle.add(cab);
-        const cabTop = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.34, 1.12), white);
-        cabTop.position.set(0, 1.8, 1.3);
-        vehicle.add(cabTop);
-        const cargo = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.56, 2.28), new THREE.MeshStandardMaterial({ color: 0xe9edf2, roughness: 0.35 }));
-        cargo.position.set(0, 1.3, -0.45);
-        vehicle.add(cargo);
-        const front = new THREE.Mesh(new THREE.BoxGeometry(2.06, 0.52, 0.06), new THREE.MeshStandardMaterial({ color: 0xb3d7bb, roughness: 0.3 }));
-        front.position.set(0, 0.78, 2.26);
-        vehicle.add(front);
-        const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.78, 0.62, 0.06), glass);
-        windshield.position.set(0, 1.24, 2.26);
-        vehicle.add(windshield);
-        addWheels(vehicle, [[-1.1, 1.62], [1.1, 1.62], [-1.1, -0.18], [1.1, -0.18], [-1.1, -1.72], [1.1, -1.72]], 0.34, 0.24);
-      } else {
-        const lower = new THREE.Mesh(new THREE.BoxGeometry(2.26, 1.1, 4.6), white);
-        lower.position.set(0, 1.02, 0.0);
-        vehicle.add(lower);
-        const upper = new THREE.Mesh(new THREE.BoxGeometry(2.06, 0.86, 3.65), white);
-        upper.position.set(0, 1.86, -0.16);
-        vehicle.add(upper);
-        const roof = new THREE.Mesh(new THREE.BoxGeometry(1.75, 0.1, 2.7), new THREE.MeshStandardMaterial({ color: 0xd5dbe1, roughness: 0.42 }));
-        roof.position.set(0, 2.34, -0.18);
-        vehicle.add(roof);
-        const stripe = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.12, 3.9), new THREE.MeshStandardMaterial({ color: 0x5f6c77, roughness: 0.55 }));
-        stripe.position.set(0, 0.64, 0.1);
-        vehicle.add(stripe);
-        const frontPanel = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.54, 0.06), new THREE.MeshStandardMaterial({ color: 0xffb36e, roughness: 0.26 }));
-        frontPanel.position.set(0, 0.86, 2.32);
-        vehicle.add(frontPanel);
-        const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.72, 0.72, 0.06), glass);
-        windshield.position.set(0, 1.34, 2.32);
-        vehicle.add(windshield);
-        addWheels(vehicle, [[-1.05, 1.68], [1.05, 1.68], [-1.05, -1.72], [1.05, -1.72]], 0.36, 0.24);
+      const fallback = new THREE.Mesh(
+        new THREE.BoxGeometry(cfg.plateW * 0.9, cfg.plateH * 0.62, 0.18),
+        new THREE.MeshStandardMaterial({ color: cfg.accent, roughness: 0.42, metalness: 0.08 })
+      );
+      fallback.position.set(0, cfg.plateY, 0.02);
+      group.add(fallback);
+
+      const applyTexture = texture => {
+        if ('colorSpace' in texture && THREE.SRGBColorSpace) {
+          texture.colorSpace = THREE.SRGBColorSpace;
+        } else if ('encoding' in texture) {
+          texture.encoding = THREE.sRGBEncoding;
+        }
+        texture.anisotropy = 4;
+        texture.needsUpdate = true;
+
+        const photo = new THREE.Mesh(
+          new THREE.PlaneGeometry(cfg.plateW, cfg.plateH),
+          new THREE.MeshStandardMaterial({
+            map: texture,
+            transparent: true,
+            alphaTest: 0.08,
+            side: THREE.DoubleSide,
+            roughness: 0.3,
+            metalness: 0.05
+          })
+        );
+        photo.position.set(0, cfg.plateY, 0.05);
+        photo.rotation.y = 0.06;
+        group.add(photo);
+        fallback.visible = false;
+      };
+
+      if (vehicleTextureCache[cfg.image]) {
+        applyTexture(vehicleTextureCache[cfg.image]);
+        return;
       }
+
+      vehicleTextureLoader.load(
+        cfg.image,
+        texture => {
+          vehicleTextureCache[cfg.image] = texture;
+          applyTexture(texture);
+        },
+        undefined,
+        () => {}
+      );
+    }
+
+    function buildVehicleModel(modelKey) {
+      const cfg = VEHICLE_ASSETS[modelKey] || VEHICLE_ASSETS.v2;
+      const vehicle = new THREE.Group();
+
+      const chassis = new THREE.Mesh(
+        new THREE.BoxGeometry(cfg.bodyW, 0.16, cfg.chassisLen),
+        new THREE.MeshStandardMaterial({ color: 0x2a3139, roughness: 0.85, metalness: 0.1 })
+      );
+      chassis.position.y = 0.5;
+      vehicle.add(chassis);
+
+      const underbody = new THREE.Mesh(
+        new THREE.BoxGeometry(cfg.bodyW * 0.86, 0.09, cfg.chassisLen * 0.84),
+        new THREE.MeshStandardMaterial({ color: 0x454f5a, roughness: 0.68, metalness: 0.12 })
+      );
+      underbody.position.y = 0.65;
+      vehicle.add(underbody);
+
+      addWheels(vehicle, cfg.wheels, cfg.wheelR, 0.22);
+      addPhotoVehicle(vehicle, cfg);
 
       return vehicle;
     }
