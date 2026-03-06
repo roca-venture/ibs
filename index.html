@@ -397,6 +397,162 @@
       margin-top: 0.2rem;
     }
 
+    /* ── COVERAGE MAP ── */
+    .coverage {
+      padding: 8rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .map-shell {
+      position: relative;
+      background: linear-gradient(160deg, #0d1218 0%, #101722 100%);
+      border: 1px solid var(--border);
+      min-height: 420px;
+      overflow: hidden;
+    }
+
+    .map-shell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(30,37,48,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30,37,48,0.5) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .mx-svg {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .mx-outline {
+      fill: rgba(11, 16, 22, 0.95);
+      stroke: rgba(0, 229, 160, 0.45);
+      stroke-width: 2;
+    }
+
+    .mx-glow {
+      fill: url(#mxGlow);
+      opacity: 0.3;
+    }
+
+    .city-marker circle {
+      fill: var(--accent);
+      stroke: #00160f;
+      stroke-width: 2;
+    }
+
+    .city-marker.vallarta circle {
+      fill: var(--accent2);
+      stroke: #001423;
+    }
+
+    .city-pulse {
+      transform-origin: center;
+      animation: mapPulse 2.2s ease-out infinite;
+      opacity: 0.65;
+    }
+
+    .city-pulse.vallarta {
+      animation-delay: 0.6s;
+    }
+
+    .city-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      fill: var(--ink);
+    }
+
+    .city-label-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      fill: var(--muted);
+    }
+
+    .city-line {
+      stroke: rgba(240,244,248,0.55);
+      stroke-width: 1;
+      stroke-dasharray: 3 3;
+    }
+
+    .coverage-cities {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .coverage-city {
+      border: 1px solid var(--border);
+      background: #111821;
+      padding: 1rem 1.1rem;
+    }
+
+    .coverage-city h3 {
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .coverage-city p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .coverage-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      text-transform: uppercase;
+      margin-top: 0.7rem;
+    }
+
+    .coverage-chip::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0,229,160,0.14);
+    }
+
+    .coverage-chip.vallarta::before {
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(0,153,255,0.14);
+    }
+
+    @keyframes mapPulse {
+      0% { transform: scale(0.4); opacity: 0.8; }
+      80% { transform: scale(3.3); opacity: 0; }
+      100% { transform: scale(3.3); opacity: 0; }
+    }
+
     /* ── FEATURES ── */
     .features {
       padding: 8rem 3rem;
@@ -579,6 +735,8 @@
       .hero { grid-template-columns: 1fr; }
       .hero-right { display: none; }
       .fleet-grid { grid-template-columns: 1fr; }
+      .coverage-grid { grid-template-columns: 1fr; }
+      .map-shell { min-height: 360px; }
       .features { grid-template-columns: 1fr; }
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -592,6 +750,7 @@
     <a href="#" class="nav-logo">IBS</a>
     <ul class="nav-links">
       <li><a href="#fleet">Flota</a></li>
+      <li><a href="#cobertura">Cobertura</a></li>
       <li><a href="#features">Tecnología</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -709,6 +868,61 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section class="coverage" id="cobertura">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Cobertura inicial</div>
+        <h2 class="section-title">Presencia en México</h2>
+        <p class="section-note">Mapa operativo con ciudades activas para despliegue de flota IBS.</p>
+      </div>
+      <a href="#contacto" class="btn-outline">Expandir cobertura →</a>
+    </div>
+    <div class="coverage-grid">
+      <div class="map-shell">
+        <svg class="mx-svg" viewBox="0 0 620 420" role="img" aria-label="Mapa de México con Tepic y Vallarta señalados">
+          <defs>
+            <radialGradient id="mxGlow" cx="50%" cy="52%" r="52%">
+              <stop offset="0%" stop-color="#00E5A0"/>
+              <stop offset="100%" stop-color="#00E5A0" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <path class="mx-glow" d="M 403.04 166.85 L 395.57 183.76 L 392.20 197.62 L 390.79 223.43 L 388.93 232.84 L 392.27 243.35 L 398.25 252.74 L 402.09 267.68 L 414.88 282.03 L 419.38 293.02 L 426.91 302.50 L 447.37 307.61 L 455.33 315.67 L 472.23 310.29 L 486.91 308.34 L 501.34 304.88 L 513.46 301.58 L 525.72 293.72 L 530.31 282.48 L 531.89 266.30 L 535.22 260.66 L 548.27 255.62 L 568.64 251.15 L 585.69 251.82 L 597.38 250.19 L 602.00 254.27 L 601.35 263.55 L 590.99 275.00 L 586.41 286.73 L 589.96 290.09 L 587.08 298.42 L 582.25 313.45 L 577.37 308.50 L 573.33 308.82 L 569.67 309.07 L 562.77 320.70 L 559.28 318.42 L 556.94 319.31 L 557.09 322.14 L 539.28 321.93 L 521.29 321.97 L 521.28 332.81 L 512.58 332.86 L 519.75 339.29 L 526.87 343.74 L 529.01 347.91 L 532.13 349.08 L 531.64 355.64 L 506.91 355.70 L 497.64 371.40 L 500.38 375.00 L 498.14 379.52 L 497.67 385.13 L 475.87 364.39 L 465.94 358.13 L 450.21 353.11 L 439.45 354.51 L 423.97 361.76 L 414.26 363.65 L 400.66 358.58 L 386.22 354.91 L 368.22 346.08 L 353.78 343.38 L 331.97 334.42 L 315.85 325.21 L 310.99 320.07 L 300.21 318.92 L 280.50 312.82 L 272.48 304.03 L 251.78 293.10 L 242.13 280.95 L 237.54 271.56 L 243.97 269.68 L 241.98 264.19 L 246.41 259.19 L 246.51 252.53 L 240.01 243.88 L 238.27 236.21 L 231.81 226.49 L 214.83 207.34 L 195.47 192.29 L 186.09 180.29 L 169.56 172.42 L 166.02 167.71 L 168.95 155.81 L 159.13 151.32 L 147.76 141.95 L 142.96 128.51 L 132.60 126.95 L 121.41 116.80 L 112.38 107.43 L 111.54 101.41 L 101.18 86.88 L 94.36 72.13 L 94.65 64.73 L 80.72 57.09 L 74.29 57.93 L 63.30 52.62 L 60.21 60.44 L 63.40 69.69 L 65.27 84.15 L 71.88 92.09 L 86.17 105.36 L 89.35 109.90 L 92.28 111.27 L 94.82 117.89 L 98.24 117.62 L 102.11 130.05 L 107.96 134.95 L 112.06 141.77 L 124.17 151.57 L 130.56 169.49 L 136.28 177.93 L 141.63 186.96 L 142.69 197.12 L 151.98 197.75 L 159.70 206.51 L 166.69 215.11 L 166.22 218.56 L 158.12 225.63 L 154.70 225.54 L 149.62 213.83 L 137.02 202.85 L 123.13 193.54 L 113.27 188.64 L 113.91 174.55 L 110.99 164.11 L 101.81 158.14 L 88.57 149.54 L 86.02 152.02 L 81.16 147.00 L 69.28 142.34 L 57.93 131.15 L 59.33 129.70 L 67.27 130.79 L 74.41 123.60 L 75.13 114.91 L 60.30 101.17 L 49.00 95.83 L 41.89 83.80 L 34.75 71.17 L 25.83 55.77 L 18.00 38.45 L 39.89 36.96 L 64.36 34.87 L 62.55 38.64 L 91.64 48.00 L 135.59 61.57 L 173.90 61.43 L 189.18 61.43 L 189.21 53.48 L 222.59 53.49 L 229.61 60.32 L 239.46 66.41 L 250.91 74.88 L 257.30 84.94 L 262.09 95.53 L 272.05 101.35 L 288.04 107.13 L 300.17 91.91 L 315.92 91.54 L 329.50 99.22 L 339.17 112.40 L 345.83 123.69 L 357.19 134.67 L 361.43 148.16 L 366.83 157.21 L 381.85 163.19 L 395.53 167.42 L 403.04 166.85 Z"/>
+          <path class="mx-outline" d="M 403.04 166.85 L 395.57 183.76 L 392.20 197.62 L 390.79 223.43 L 388.93 232.84 L 392.27 243.35 L 398.25 252.74 L 402.09 267.68 L 414.88 282.03 L 419.38 293.02 L 426.91 302.50 L 447.37 307.61 L 455.33 315.67 L 472.23 310.29 L 486.91 308.34 L 501.34 304.88 L 513.46 301.58 L 525.72 293.72 L 530.31 282.48 L 531.89 266.30 L 535.22 260.66 L 548.27 255.62 L 568.64 251.15 L 585.69 251.82 L 597.38 250.19 L 602.00 254.27 L 601.35 263.55 L 590.99 275.00 L 586.41 286.73 L 589.96 290.09 L 587.08 298.42 L 582.25 313.45 L 577.37 308.50 L 573.33 308.82 L 569.67 309.07 L 562.77 320.70 L 559.28 318.42 L 556.94 319.31 L 557.09 322.14 L 539.28 321.93 L 521.29 321.97 L 521.28 332.81 L 512.58 332.86 L 519.75 339.29 L 526.87 343.74 L 529.01 347.91 L 532.13 349.08 L 531.64 355.64 L 506.91 355.70 L 497.64 371.40 L 500.38 375.00 L 498.14 379.52 L 497.67 385.13 L 475.87 364.39 L 465.94 358.13 L 450.21 353.11 L 439.45 354.51 L 423.97 361.76 L 414.26 363.65 L 400.66 358.58 L 386.22 354.91 L 368.22 346.08 L 353.78 343.38 L 331.97 334.42 L 315.85 325.21 L 310.99 320.07 L 300.21 318.92 L 280.50 312.82 L 272.48 304.03 L 251.78 293.10 L 242.13 280.95 L 237.54 271.56 L 243.97 269.68 L 241.98 264.19 L 246.41 259.19 L 246.51 252.53 L 240.01 243.88 L 238.27 236.21 L 231.81 226.49 L 214.83 207.34 L 195.47 192.29 L 186.09 180.29 L 169.56 172.42 L 166.02 167.71 L 168.95 155.81 L 159.13 151.32 L 147.76 141.95 L 142.96 128.51 L 132.60 126.95 L 121.41 116.80 L 112.38 107.43 L 111.54 101.41 L 101.18 86.88 L 94.36 72.13 L 94.65 64.73 L 80.72 57.09 L 74.29 57.93 L 63.30 52.62 L 60.21 60.44 L 63.40 69.69 L 65.27 84.15 L 71.88 92.09 L 86.17 105.36 L 89.35 109.90 L 92.28 111.27 L 94.82 117.89 L 98.24 117.62 L 102.11 130.05 L 107.96 134.95 L 112.06 141.77 L 124.17 151.57 L 130.56 169.49 L 136.28 177.93 L 141.63 186.96 L 142.69 197.12 L 151.98 197.75 L 159.70 206.51 L 166.69 215.11 L 166.22 218.56 L 158.12 225.63 L 154.70 225.54 L 149.62 213.83 L 137.02 202.85 L 123.13 193.54 L 113.27 188.64 L 113.91 174.55 L 110.99 164.11 L 101.81 158.14 L 88.57 149.54 L 86.02 152.02 L 81.16 147.00 L 69.28 142.34 L 57.93 131.15 L 59.33 129.70 L 67.27 130.79 L 74.41 123.60 L 75.13 114.91 L 60.30 101.17 L 49.00 95.83 L 41.89 83.80 L 34.75 71.17 L 25.83 55.77 L 18.00 38.45 L 39.89 36.96 L 64.36 34.87 L 62.55 38.64 L 91.64 48.00 L 135.59 61.57 L 173.90 61.43 L 189.18 61.43 L 189.21 53.48 L 222.59 53.49 L 229.61 60.32 L 239.46 66.41 L 250.91 74.88 L 257.30 84.94 L 262.09 95.53 L 272.05 101.35 L 288.04 107.13 L 300.17 91.91 L 315.92 91.54 L 329.50 99.22 L 339.17 112.40 L 345.83 123.69 L 357.19 134.67 L 361.43 148.16 L 366.83 157.21 L 381.85 163.19 L 395.53 167.42 L 403.04 166.85 Z"/>
+
+          <g class="city-marker tepic">
+            <circle class="city-pulse" cx="253.68" cy="250.92" r="2.8"/>
+            <circle cx="253.68" cy="250.92" r="4.6"/>
+            <line class="city-line" x1="258.2" y1="247.9" x2="322" y2="226"/>
+            <text class="city-label" x="326" y="222">Tepic</text>
+            <text class="city-label-sub" x="326" y="236">Nayarit</text>
+          </g>
+
+          <g class="city-marker vallarta">
+            <circle class="city-pulse vallarta" cx="247.20" cy="267.34" r="2.8"/>
+            <circle cx="247.20" cy="267.34" r="4.6"/>
+            <line class="city-line" x1="251.6" y1="270.2" x2="334" y2="286"/>
+            <text class="city-label" x="338" y="282">Vallarta</text>
+            <text class="city-label-sub" x="338" y="296">Jalisco</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="coverage-cities">
+        <article class="coverage-city">
+          <h3>Tepic</h3>
+          <p>Nayarit · Nodo estratégico para distribución regional y operaciones de última milla.</p>
+          <span class="coverage-chip">Operación activa</span>
+        </article>
+        <article class="coverage-city">
+          <h3>Vallarta</h3>
+          <p>Jalisco · Cobertura urbana y turística para entregas de alta frecuencia.</p>
+          <span class="coverage-chip vallarta">Operación activa</span>
+        </article>
+      </div>
     </div>
   </section>
 
