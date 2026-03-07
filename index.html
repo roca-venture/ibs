@@ -210,7 +210,7 @@
       margin-top: 0.3rem;
     }
 
-    /* ── 3D VIEWER ── */
+    /* ── HERO SHOWCASE ── */
     .hero-right {
       position: relative;
       display: flex;
@@ -219,38 +219,107 @@
       z-index: 2;
     }
 
-    #canvas-container {
+    .hero-showcase {
       position: relative;
-      width: 100%;
-      height: 100%;
-      min-height: 500px;
+      width: min(620px, 95%);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      padding: 0.9rem;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 10% 15%, rgba(0, 229, 160, 0.14), transparent 48%),
+        radial-gradient(circle at 90% 80%, rgba(0, 153, 255, 0.12), transparent 42%),
+        #0b1016;
+      box-shadow: 0 26px 64px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
     }
 
-    #three-canvas {
-      width: 100% !important;
-      height: 100% !important;
-      touch-action: none;
-    }
-
-    .viewer-hint {
+    .hero-showcase::after {
+      content: '';
       position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(52, 67, 84, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 67, 84, 0.18) 1px, transparent 1px);
+      background-size: 34px 34px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-model-card {
+      position: relative;
+      z-index: 1;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(17, 24, 33, 0.94), rgba(10, 14, 19, 0.94));
+      min-height: 168px;
+      padding: 0.6rem 0.7rem 0.55rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-model-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 229, 160, 0.5);
+    }
+
+    .hero-model-card:nth-child(2):hover { border-color: rgba(0, 153, 255, 0.5); }
+    .hero-model-card:nth-child(3):hover { border-color: rgba(151, 226, 175, 0.5); }
+    .hero-model-card:nth-child(4):hover { border-color: rgba(255, 140, 66, 0.5); }
+
+    .hero-model-media {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      animation: pulse 2s infinite;
+      justify-content: center;
+      min-height: 126px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 0.45rem;
+      background: radial-gradient(circle at 50% 78%, rgba(0, 229, 160, 0.14), transparent 56%);
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    .hero-model-card:nth-child(2) .hero-model-media {
+      background: radial-gradient(circle at 50% 78%, rgba(0, 153, 255, 0.14), transparent 56%);
+    }
+
+    .hero-model-card:nth-child(3) .hero-model-media {
+      background: radial-gradient(circle at 50% 78%, rgba(143, 211, 168, 0.14), transparent 56%);
+    }
+
+    .hero-model-card:nth-child(4) .hero-model-media {
+      background: radial-gradient(circle at 50% 78%, rgba(255, 140, 66, 0.16), transparent 56%);
+    }
+
+    .hero-model-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(1.04);
+      filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.42));
+    }
+
+    .hero-model-meta {
+      font-family: 'DM Mono', monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .hero-model-name {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      color: var(--ink);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .hero-model-type {
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     /* Grid lines background */
@@ -842,7 +911,14 @@
 
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
+      .hero-right {
+        padding: 0 1.4rem 2.8rem;
+      }
+      .hero-showcase {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+      }
       .fleet-grid { grid-template-columns: 1fr; }
       .tech-specs { grid-template-columns: 1fr; }
       .coverage-grid { grid-template-columns: 1fr; }
@@ -869,6 +945,15 @@
     @media (max-width: 600px) {
       .hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
       .hero-sub { font-size: 0.8rem; max-width: none; }
+      .hero-right { padding: 0 1rem 2.2rem; }
+      .hero-showcase {
+        gap: 0.6rem;
+        padding: 0.6rem;
+      }
+      .hero-model-card { min-height: 146px; padding: 0.48rem 0.52rem 0.44rem; }
+      .hero-model-media { min-height: 104px; margin-bottom: 0.35rem; }
+      .hero-model-name { font-size: 0.7rem; letter-spacing: 0.13em; }
+      .hero-model-type { font-size: 0.56rem; letter-spacing: 0.06em; }
       .hero-btns { flex-direction: column; }
       .hero-btns a { width: 100%; }
       .hero-stats {
@@ -937,10 +1022,44 @@
         </div>
       </div>
     </div>
-    <div class="hero-right" id="canvas-container">
-      <canvas id="three-canvas"></canvas>
-      <div class="viewer-hint">
-        ↻ arrastra para rotar
+    <div class="hero-right">
+      <div class="hero-showcase" aria-label="Modelos disponibles">
+        <article class="hero-model-card">
+          <div class="hero-model-media">
+            <img loading="eager" decoding="async" src="https://static.wixstatic.com/media/ff08fe_5e49c4f184fa4d3ea28aef681211c2a6~mv2.png/v1/crop/x_221,y_0,w_1711,h_1080/fill/w_1286,h_812,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/V2%20COSTADO%20CHOFER_01_blanco.png" alt="Modelo V2" />
+          </div>
+          <div class="hero-model-meta">
+            <span class="hero-model-name">V2</span>
+            <span class="hero-model-type">Ligero</span>
+          </div>
+        </article>
+        <article class="hero-model-card">
+          <div class="hero-model-media">
+            <img loading="eager" decoding="async" src="https://static.wixstatic.com/media/ff08fe_85c5bc912cad466493565b66cd259de5~mv2.png/v1/fill/w_1200,h_920,al_c,lg_1,q_90,enc_avif,quality_auto/bps-1500-365x302.png" alt="Modelo 1500" />
+          </div>
+          <div class="hero-model-meta">
+            <span class="hero-model-name">1500</span>
+            <span class="hero-model-type">Carga</span>
+          </div>
+        </article>
+        <article class="hero-model-card">
+          <div class="hero-model-media">
+            <img loading="eager" decoding="async" src="https://static.wixstatic.com/media/8b422d_05472bee84f0480c97891dbf9b861a23~mv2.png/v1/crop/x_92,y_0,w_2602,h_1500/fill/w_1600,h_922,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chasis%20Cab%20X7_edited_edited_edited.png" alt="Modelo X7" />
+          </div>
+          <div class="hero-model-meta">
+            <span class="hero-model-name">X7</span>
+            <span class="hero-model-type">Mediano</span>
+          </div>
+        </article>
+        <article class="hero-model-card">
+          <div class="hero-model-media">
+            <img loading="eager" decoding="async" src="https://static.wixstatic.com/media/8b422d_41168029b47541e7b74af9e045476b3b~mv2.png/v1/crop/x_0,y_252,w_1218,h_715/fill/w_1400,h_822,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/BPS-E-TRUCK---MAXENCE-1_edited.png" alt="Modelo Maxence" />
+          </div>
+          <div class="hero-model-meta">
+            <span class="hero-model-name">Maxence</span>
+            <span class="hero-model-type">Pesado</span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -1207,364 +1326,21 @@
     <div class="footer-copy">© 2026 · ibs.roca.ventures</div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    // ── HERO 3D VIEWER ──
-    function initHeroViewer() {
-      const canvas = document.getElementById('three-canvas');
-      const container = document.getElementById('canvas-container');
-      if (!canvas || !container) return;
-
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      renderer.setClearColor(0x000000, 0);
-      if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) {
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-      } else {
-        renderer.outputEncoding = THREE.sRGBEncoding;
-      }
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 100);
-      camera.position.set(4.4, 2.0, 5.8);
-      camera.lookAt(0, 1.2, 0);
-
-      // Resize
-      function resize() {
-        const w = container.clientWidth, h = container.clientHeight;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      // Lights
-      const ambient = new THREE.AmbientLight(0xffffff, 0.72);
-      scene.add(ambient);
-      const key = new THREE.DirectionalLight(0x8fffe0, 1.2);
-      key.position.set(5, 6, 5);
-      scene.add(key);
-      const fill = new THREE.DirectionalLight(0x8eb9ff, 0.75);
-      fill.position.set(-5, 3, -4);
-      scene.add(fill);
-      const rim = new THREE.DirectionalLight(0xffffff, 0.55);
-      rim.position.set(0, 1.2, -5);
-      scene.add(rim);
-
-      // Hero model: clean 2.5D render (vehicle cutout + subtle depth) without blocky chassis
-      const carGroup = new THREE.Group();
-      carGroup.position.y = 0.03;
-      carGroup.rotation.y = -0.36;
-      scene.add(carGroup);
-
-      const heroCfg = {
-        image: 'https://static.wixstatic.com/media/8b422d_41168029b47541e7b74af9e045476b3b~mv2.png/v1/crop/x_0,y_252,w_1218,h_715/fill/w_1800,h_1056,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/BPS-E-TRUCK---MAXENCE-1_edited.png',
-        plateW: 3.5,
-        plateH: 1.95,
-        plateY: 1.32
-      };
-
-      const fallbackBody = new THREE.Mesh(
-        new THREE.BoxGeometry(2.75, 1.35, 1.32),
-        new THREE.MeshStandardMaterial({ color: 0x2e404f, roughness: 0.5, metalness: 0.1 })
-      );
-      fallbackBody.position.set(0, heroCfg.plateY - 0.08, 0);
-      fallbackBody.visible = false;
-      carGroup.add(fallbackBody);
-
-      const groundGlow = new THREE.Mesh(
-        new THREE.CircleGeometry(6.2, 72),
-        new THREE.MeshBasicMaterial({ color: 0x0b1219, transparent: true, opacity: 0.62 })
-      );
-      groundGlow.rotation.x = -Math.PI / 2;
-      groundGlow.position.y = 0;
-      scene.add(groundGlow);
-
-      const shadow = new THREE.Mesh(
-        new THREE.CircleGeometry(1.9, 64),
-        new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.24 })
-      );
-      shadow.rotation.x = -Math.PI / 2;
-      shadow.position.y = 0.01;
-      shadow.scale.set(1.26, 0.5, 1);
-      scene.add(shadow);
-
-      // Grid lines on ground
-      const gridHelper = new THREE.GridHelper(10, 20, 0x1E2530, 0x13202a);
-      gridHelper.position.y = 0.02;
-      if (gridHelper.material && 'transparent' in gridHelper.material) {
-        gridHelper.material.transparent = true;
-        gridHelper.material.opacity = 0.52;
-      }
-      scene.add(gridHelper);
-
-      const heroTextureLoader = new THREE.TextureLoader();
-      heroTextureLoader.setCrossOrigin('anonymous');
-      heroTextureLoader.load(
-        heroCfg.image,
-        texture => {
-          if ('colorSpace' in texture && THREE.SRGBColorSpace) {
-            texture.colorSpace = THREE.SRGBColorSpace;
-          } else if ('encoding' in texture) {
-            texture.encoding = THREE.sRGBEncoding;
-          }
-          texture.anisotropy = Math.max(
-            2,
-            Math.min(
-              renderer.capabilities.getMaxAnisotropy ? renderer.capabilities.getMaxAnisotropy() : 4,
-              8
-            )
-          );
-          texture.needsUpdate = true;
-
-          const photo = new THREE.Mesh(
-            new THREE.PlaneGeometry(heroCfg.plateW, heroCfg.plateH),
-            new THREE.MeshStandardMaterial({
-              map: texture,
-              transparent: true,
-              alphaTest: 0.08,
-              side: THREE.DoubleSide,
-              roughness: 0.34,
-              metalness: 0.03
-            })
-          );
-          photo.position.set(0, heroCfg.plateY, 0.02);
-          carGroup.add(photo);
-
-          const bodyDepth = new THREE.Mesh(
-            new THREE.PlaneGeometry(heroCfg.plateW * 0.98, heroCfg.plateH * 0.98),
-            new THREE.MeshBasicMaterial({
-              map: texture,
-              color: 0x06131d,
-              transparent: true,
-              opacity: 0.18,
-              alphaTest: 0.08,
-              side: THREE.DoubleSide
-            })
-          );
-          bodyDepth.position.set(-0.08, heroCfg.plateY - 0.03, -0.16);
-          bodyDepth.rotation.y = -0.2;
-          carGroup.add(bodyDepth);
-
-          const accentShell = new THREE.Mesh(
-            new THREE.PlaneGeometry(heroCfg.plateW * 0.98, heroCfg.plateH * 0.98),
-            new THREE.MeshBasicMaterial({
-              map: texture,
-              color: 0x84f0d4,
-              transparent: true,
-              opacity: 0.15,
-              alphaTest: 0.08,
-              side: THREE.DoubleSide
-            })
-          );
-          accentShell.position.set(-0.16, heroCfg.plateY + 0.01, -0.24);
-          accentShell.rotation.y = -0.3;
-          carGroup.add(accentShell);
-        },
-        undefined,
-        () => {
-          fallbackBody.visible = true;
-        }
-      );
-
-      // Drag rotation + idle auto sway
-      let isDragging = false;
-      let prevX = 0;
-      let rotationY = carGroup.rotation.y;
-      let autoRotate = true;
-      let idleSince = performance.now();
-
-      canvas.addEventListener('pointerdown', e => {
-        isDragging = true;
-        autoRotate = false;
-        prevX = e.clientX;
-        if (canvas.setPointerCapture) canvas.setPointerCapture(e.pointerId);
-      });
-
-      canvas.addEventListener('pointermove', e => {
-        if (!isDragging) return;
-        rotationY += (e.clientX - prevX) * 0.009;
-        rotationY = Math.max(-1.2, Math.min(0.45, rotationY));
-        carGroup.rotation.y = rotationY;
-        prevX = e.clientX;
-      });
-
-      const stopDrag = () => {
-        if (!isDragging) return;
-        isDragging = false;
-        idleSince = performance.now();
-      };
-      canvas.addEventListener('pointerup', stopDrag);
-      canvas.addEventListener('pointercancel', stopDrag);
-      window.addEventListener('blur', stopDrag);
-
-      let t = 0;
-      function animate() {
-        requestAnimationFrame(animate);
-        t += 0.018;
-        if (!isDragging) {
-          if (!autoRotate && performance.now() - idleSince > 1400) autoRotate = true;
-          if (autoRotate) {
-            const target = -0.35 + Math.sin(t) * 0.24;
-            carGroup.rotation.y += (target - carGroup.rotation.y) * 0.04;
-            rotationY = carGroup.rotation.y;
-          }
-        }
-        renderer.render(scene, camera);
-      }
-      animate();
-    }
-
-    // ── CARD MINI VIEWERS ──
     const VEHICLE_ASSETS = {
       v2: {
-        image: 'https://static.wixstatic.com/media/ff08fe_5e49c4f184fa4d3ea28aef681211c2a6~mv2.png/v1/crop/x_221,y_0,w_1711,h_1080/fill/w_1286,h_812,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/V2%20COSTADO%20CHOFER_01_blanco.png',
-        bodyW: 2.2,
-        chassisLen: 3.2,
-        plateW: 2.85,
-        plateH: 1.44,
-        plateY: 1.08,
-        wheels: [[-0.95, 1.12], [0.95, 1.12], [-0.95, -1.05], [0.95, -1.05]],
-        wheelR: 0.3,
-        accent: 0xa8d9be
+        image: 'https://static.wixstatic.com/media/ff08fe_5e49c4f184fa4d3ea28aef681211c2a6~mv2.png/v1/crop/x_221,y_0,w_1711,h_1080/fill/w_1286,h_812,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/V2%20COSTADO%20CHOFER_01_blanco.png'
       },
       '1500': {
-        image: 'https://static.wixstatic.com/media/ff08fe_85c5bc912cad466493565b66cd259de5~mv2.png/v1/fill/w_1200,h_920,al_c,lg_1,q_90,enc_avif,quality_auto/bps-1500-365x302.png',
-        bodyW: 2.28,
-        chassisLen: 3.95,
-        plateW: 2.98,
-        plateH: 1.34,
-        plateY: 1.06,
-        wheels: [[-1.0, 1.38], [1.0, 1.38], [-1.0, -1.42], [1.0, -1.42]],
-        wheelR: 0.31,
-        accent: 0x8fc4f0
+        image: 'https://static.wixstatic.com/media/ff08fe_85c5bc912cad466493565b66cd259de5~mv2.png/v1/fill/w_1200,h_920,al_c,lg_1,q_90,enc_avif,quality_auto/bps-1500-365x302.png'
       },
       x7: {
-        image: 'https://static.wixstatic.com/media/8b422d_05472bee84f0480c97891dbf9b861a23~mv2.png/v1/crop/x_92,y_0,w_2602,h_1500/fill/w_1600,h_922,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chasis%20Cab%20X7_edited_edited_edited.png',
-        bodyW: 2.46,
-        chassisLen: 4.38,
-        plateW: 3.18,
-        plateH: 1.48,
-        plateY: 1.2,
-        wheels: [[-1.1, 1.58], [1.1, 1.58], [-1.1, -0.2], [1.1, -0.2], [-1.1, -1.68], [1.1, -1.68]],
-        wheelR: 0.34,
-        accent: 0xb3d7bb
+        image: 'https://static.wixstatic.com/media/8b422d_05472bee84f0480c97891dbf9b861a23~mv2.png/v1/crop/x_92,y_0,w_2602,h_1500/fill/w_1600,h_922,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chasis%20Cab%20X7_edited_edited_edited.png'
       },
       maxence: {
-        image: 'https://static.wixstatic.com/media/8b422d_41168029b47541e7b74af9e045476b3b~mv2.png/v1/crop/x_0,y_252,w_1218,h_715/fill/w_1400,h_822,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/BPS-E-TRUCK---MAXENCE-1_edited.png',
-        bodyW: 2.34,
-        chassisLen: 4.72,
-        plateW: 3.32,
-        plateH: 1.56,
-        plateY: 1.26,
-        wheels: [[-1.05, 1.7], [1.05, 1.7], [-1.05, -1.72], [1.05, -1.72]],
-        wheelR: 0.36,
-        accent: 0xffb36e
+        image: 'https://static.wixstatic.com/media/8b422d_41168029b47541e7b74af9e045476b3b~mv2.png/v1/crop/x_0,y_252,w_1218,h_715/fill/w_1400,h_822,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/BPS-E-TRUCK---MAXENCE-1_edited.png'
       }
     };
-
-    const vehicleTextureCache = {};
-    const vehicleTextureLoader = new THREE.TextureLoader();
-    vehicleTextureLoader.setCrossOrigin('anonymous');
-
-    function addWheels(group, wheelPositions, radius = 0.3, width = 0.2) {
-      const wheelMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.92 });
-      const rimMat = new THREE.MeshStandardMaterial({ color: 0x9aa2aa, roughness: 0.26, metalness: 0.72 });
-      wheelPositions.forEach(([x, z]) => {
-        const tire = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, width, 24), wheelMat);
-        tire.rotation.z = Math.PI / 2;
-        tire.position.set(x, radius, z);
-        group.add(tire);
-
-        const rim = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.54, radius * 0.54, width + 0.02, 18), rimMat);
-        rim.rotation.z = Math.PI / 2;
-        rim.position.set(x, radius, z);
-        group.add(rim);
-      });
-    }
-
-    function addPhotoVehicle(group, cfg) {
-      const depthPlate = new THREE.Mesh(
-        new THREE.PlaneGeometry(cfg.plateW * 0.98, cfg.plateH * 0.98),
-        new THREE.MeshBasicMaterial({ color: 0x0a1016, transparent: true, opacity: 0.45, side: THREE.DoubleSide })
-      );
-      depthPlate.position.set(-0.08, cfg.plateY - 0.03, -0.14);
-      depthPlate.rotation.y = 0.28;
-      group.add(depthPlate);
-
-      const fallback = new THREE.Mesh(
-        new THREE.BoxGeometry(cfg.plateW * 0.9, cfg.plateH * 0.62, 0.18),
-        new THREE.MeshStandardMaterial({ color: cfg.accent, roughness: 0.42, metalness: 0.08 })
-      );
-      fallback.position.set(0, cfg.plateY, 0.02);
-      group.add(fallback);
-
-      const applyTexture = texture => {
-        if ('colorSpace' in texture && THREE.SRGBColorSpace) {
-          texture.colorSpace = THREE.SRGBColorSpace;
-        } else if ('encoding' in texture) {
-          texture.encoding = THREE.sRGBEncoding;
-        }
-        texture.anisotropy = 4;
-        texture.needsUpdate = true;
-
-        const photo = new THREE.Mesh(
-          new THREE.PlaneGeometry(cfg.plateW, cfg.plateH),
-          new THREE.MeshStandardMaterial({
-            map: texture,
-            transparent: true,
-            alphaTest: 0.08,
-            side: THREE.DoubleSide,
-            roughness: 0.3,
-            metalness: 0.05
-          })
-        );
-        photo.position.set(0, cfg.plateY, 0.05);
-        photo.rotation.y = 0.06;
-        group.add(photo);
-        fallback.visible = false;
-      };
-
-      if (vehicleTextureCache[cfg.image]) {
-        applyTexture(vehicleTextureCache[cfg.image]);
-        return;
-      }
-
-      vehicleTextureLoader.load(
-        cfg.image,
-        texture => {
-          vehicleTextureCache[cfg.image] = texture;
-          applyTexture(texture);
-        },
-        undefined,
-        () => {}
-      );
-    }
-
-    function buildVehicleModel(modelKey) {
-      const cfg = VEHICLE_ASSETS[modelKey] || VEHICLE_ASSETS.v2;
-      const vehicle = new THREE.Group();
-
-      const chassis = new THREE.Mesh(
-        new THREE.BoxGeometry(cfg.bodyW, 0.16, cfg.chassisLen),
-        new THREE.MeshStandardMaterial({ color: 0x2a3139, roughness: 0.85, metalness: 0.1 })
-      );
-      chassis.position.y = 0.5;
-      vehicle.add(chassis);
-
-      const underbody = new THREE.Mesh(
-        new THREE.BoxGeometry(cfg.bodyW * 0.86, 0.09, cfg.chassisLen * 0.84),
-        new THREE.MeshStandardMaterial({ color: 0x454f5a, roughness: 0.68, metalness: 0.12 })
-      );
-      underbody.position.y = 0.65;
-      vehicle.add(underbody);
-
-      addWheels(vehicle, cfg.wheels, cfg.wheelR, 0.22);
-      addPhotoVehicle(vehicle, cfg);
-
-      return vehicle;
-    }
 
     function setStaticVehicleImage(canvasId, modelKey) {
       const canvas = document.getElementById(canvasId);
@@ -1578,99 +1354,18 @@
         img = document.createElement('img');
         img.className = 'vehicle-static-photo';
         img.loading = 'lazy';
+        img.decoding = 'async';
         parent.prepend(img);
       }
       img.src = cfg.image;
       img.alt = `Modelo ${modelKey.toUpperCase()}`;
     }
 
-    function initCardViewer(canvasId, modelKey, lightColor) {
-      const canvas = document.getElementById(canvasId);
-      if (!canvas) return;
-      const parent = canvas.parentElement;
-
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-      renderer.setClearColor(0x090C10, 1);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, parent.clientWidth / parent.clientHeight, 0.1, 100);
-
-      const cameraByModel = {
-        v2: [2.8, 1.5, 4.2],
-        '1500': [3.0, 1.55, 4.35],
-        x7: [3.35, 1.8, 4.9],
-        maxence: [3.5, 1.9, 5.2]
-      };
-      const [cx, cy, cz] = cameraByModel[modelKey] || [2.8, 1.5, 4.2];
-      camera.position.set(cx, cy, cz);
-      camera.lookAt(0, 0.9, 0);
-
-      function resize() {
-        const w = parent.clientWidth;
-        const h = parent.clientHeight;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      const ambient = new THREE.AmbientLight(0xffffff, 0.56);
-      scene.add(ambient);
-      const key = new THREE.DirectionalLight(lightColor, 1.7);
-      key.position.set(3.5, 5.5, 3.0);
-      scene.add(key);
-      const fill = new THREE.DirectionalLight(0xffffff, 0.35);
-      fill.position.set(-3.0, 3.0, -2.0);
-      scene.add(fill);
-
-      const grid = new THREE.GridHelper(7, 14, 0x1e2530, 0x1e2530);
-      scene.add(grid);
-
-      const vehicle = buildVehicleModel(modelKey);
-      scene.add(vehicle);
-
-      let dragging = false;
-      let px = 0;
-      const spinSpeed = window.matchMedia('(max-width: 900px)').matches ? 0.0024 : 0.006;
-      canvas.addEventListener('mousedown', e => { dragging = true; px = e.clientX; });
-      window.addEventListener('mouseup', () => { dragging = false; });
-      window.addEventListener('mousemove', e => {
-        if (dragging) {
-          vehicle.rotation.y += (e.clientX - px) * 0.01;
-          px = e.clientX;
-        }
-      });
-
-      function animate() {
-        requestAnimationFrame(animate);
-        if (!dragging) vehicle.rotation.y += spinSpeed;
-        renderer.render(scene, camera);
-      }
-      animate();
-    }
-
     window.addEventListener('load', () => {
-      const isNarrow = window.matchMedia('(max-width: 900px)').matches;
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      const forcePhotoFleet = true;
-      const useStaticFleet = forcePhotoFleet || isIOS || isNarrow || typeof THREE === 'undefined';
-
-      if (typeof THREE !== 'undefined' && !isNarrow) initHeroViewer();
-
-      if (useStaticFleet) {
-        setStaticVehicleImage('card-canvas-1', 'v2');
-        setStaticVehicleImage('card-canvas-2', '1500');
-        setStaticVehicleImage('card-canvas-3', 'x7');
-        setStaticVehicleImage('card-canvas-4', 'maxence');
-        return;
-      }
-
-      initCardViewer('card-canvas-1', 'v2', 0x00E5A0);
-      initCardViewer('card-canvas-2', '1500', 0x0099FF);
-      initCardViewer('card-canvas-3', 'x7', 0x8fd3a8);
-      initCardViewer('card-canvas-4', 'maxence', 0xFF8C42);
+      setStaticVehicleImage('card-canvas-1', 'v2');
+      setStaticVehicleImage('card-canvas-2', '1500');
+      setStaticVehicleImage('card-canvas-3', 'x7');
+      setStaticVehicleImage('card-canvas-4', 'maxence');
     });
   </script>
 </body>
