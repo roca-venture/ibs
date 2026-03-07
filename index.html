@@ -350,7 +350,8 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 0.6rem;
+      padding: 0.35rem;
+      transform: scale(1.03);
       filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.36));
     }
 
@@ -360,6 +361,10 @@
 
     .vehicle-img.is-static .vehicle-static-photo {
       display: block;
+    }
+
+    .vehicle-img.is-static {
+      background: radial-gradient(circle at 50% 75%, rgba(0, 229, 160, 0.16), transparent 48%), var(--bg);
     }
 
     .vehicle-badge {
@@ -1369,7 +1374,7 @@
         accent: 0xa8d9be
       },
       '1500': {
-        image: 'https://static.wixstatic.com/media/ff08fe_85c5bc912cad466493565b66cd259de5~mv2.png/v1/fill/w_511,h_392,al_c,lg_1,q_85,enc_avif,quality_auto/bps-1500-365x302.png',
+        image: 'https://static.wixstatic.com/media/ff08fe_85c5bc912cad466493565b66cd259de5~mv2.png/v1/fill/w_1200,h_920,al_c,lg_1,q_90,enc_avif,quality_auto/bps-1500-365x302.png',
         bodyW: 2.28,
         chassisLen: 3.95,
         plateW: 2.98,
@@ -1380,7 +1385,7 @@
         accent: 0x8fc4f0
       },
       x7: {
-        image: 'https://static.wixstatic.com/media/8b422d_05472bee84f0480c97891dbf9b861a23~mv2.png/v1/crop/x_92,y_0,w_2602,h_1500/fill/w_722,h_430,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chasis%20Cab%20X7_edited_edited_edited.png',
+        image: 'https://static.wixstatic.com/media/8b422d_05472bee84f0480c97891dbf9b861a23~mv2.png/v1/crop/x_92,y_0,w_2602,h_1500/fill/w_1600,h_922,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chasis%20Cab%20X7_edited_edited_edited.png',
         bodyW: 2.46,
         chassisLen: 4.38,
         plateW: 3.18,
@@ -1391,7 +1396,7 @@
         accent: 0xb3d7bb
       },
       maxence: {
-        image: 'https://static.wixstatic.com/media/8b422d_41168029b47541e7b74af9e045476b3b~mv2.png/v1/crop/x_0,y_252,w_1218,h_715/fill/w_450,h_264,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/BPS-E-TRUCK---MAXENCE-1_edited.png',
+        image: 'https://static.wixstatic.com/media/8b422d_41168029b47541e7b74af9e045476b3b~mv2.png/v1/crop/x_0,y_252,w_1218,h_715/fill/w_1400,h_822,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/BPS-E-TRUCK---MAXENCE-1_edited.png',
         bodyW: 2.34,
         chassisLen: 4.72,
         plateW: 3.32,
@@ -1593,7 +1598,10 @@
     window.addEventListener('load', () => {
       const isNarrow = window.matchMedia('(max-width: 900px)').matches;
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      const useStaticFleet = isIOS || isNarrow;
+      const forcePhotoFleet = true;
+      const useStaticFleet = forcePhotoFleet || isIOS || isNarrow || typeof THREE === 'undefined';
+
+      if (typeof THREE !== 'undefined' && !isNarrow) initHeroViewer();
 
       if (useStaticFleet) {
         setStaticVehicleImage('card-canvas-1', 'v2');
@@ -1602,9 +1610,6 @@
         setStaticVehicleImage('card-canvas-4', 'maxence');
         return;
       }
-
-      if (typeof THREE === 'undefined') return;
-      if (!isNarrow) initHeroViewer();
 
       initCardViewer('card-canvas-1', 'v2', 0x00E5A0);
       initCardViewer('card-canvas-2', '1500', 0x0099FF);
